@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestão Inteligente · IA no Marketing e nas Finanças</title>
+<meta name="description" content="Projeto educativo: como a Inteligência Artificial pode transformar o marketing e as finanças de micro e pequenas empresas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1c2a24;
+    --dark-2: #26382f;
+    --paper: #f5f2ea;
+    --card: #fffdf8;
+    --line: #e2ddd0;
+    --line-2: #d8d2c3;
+    --orange: #e07a3a;
+    --orange-text: #c25f22;
+    --orange-light: #e9935a;
+    --green: #2f6f5e;
+    --text: #1c2a24;
+    --muted: #4d5852;
+    --muted-dark: #c9cec7;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: Inter, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+    --max: 1160px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--text); line-height: 1.55; font-size: 18px; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(28, 42, 36, .94); backdrop-filter: blur(8px); color: var(--paper); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 24px; }
+  nav .brand { font-family: var(--serif); font-size: 22px; text-decoration: none; white-space: nowrap; }
+  nav ul { list-style: none; display: flex; gap: 22px; overflow-x: auto; scrollbar-width: none; }
+  nav ul::-webkit-scrollbar { display: none; }
+  nav ul a { text-decoration: none; font-size: 14px; color: #d9dcd6; white-space: nowrap; transition: color .2s; }
+  nav ul a:hover, nav ul a.active { color: var(--orange-light); }
+
+  /* Sections */
+  section { padding: 104px 0; }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--orange-text); margin-bottom: 12px; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 5vw, 52px); line-height: 1.1; margin-bottom: 48px; max-width: 820px; }
+  h3 { font-size: 22px; font-weight: 700; line-height: 1.25; }
+  .alt { background: #efebe1; }
+  .dark { background: var(--dark); color: var(--paper); }
+  .dark .eyebrow { color: var(--orange-light); }
+
+  /* Hero */
+  .hero { background: var(--dark); color: var(--paper); min-height: calc(100vh - 64px); display: flex; align-items: center; padding: 96px 0; position: relative; overflow: hidden; }
+  .hero::after { content: ""; position: absolute; right: -180px; bottom: -180px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(224,122,58,.28), rgba(224,122,58,0) 70%); pointer-events: none; }
+  .hero .eyebrow { color: var(--orange-light); }
+  .hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 10vw, 112px); line-height: 1; margin: 16px 0 28px; }
+  .hero p.lead { font-size: clamp(20px, 2.6vw, 30px); line-height: 1.35; color: #d9dcd6; max-width: 820px; }
+  .hero p.lead span { color: var(--orange-light); }
+  .hero .author { margin-top: 56px; font-size: 16px; color: #aeb5ad; }
+  .btn { display: inline-block; margin-top: 40px; padding: 14px 26px; border-radius: 999px; background: var(--orange); color: var(--dark); font-weight: 700; text-decoration: none; transition: transform .2s, background .2s; }
+  .btn:hover { transform: translateY(-2px); background: var(--orange-light); }
+
+  /* Grids */
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .pain { border-top: 5px solid var(--orange); padding-top: 28px; }
+  .pain.green { border-color: var(--green); }
+  .pain .num { font-family: var(--serif); font-size: 64px; line-height: 1; color: var(--orange-text); margin-bottom: 16px; }
+  .pain.green .num { color: var(--green); }
+  .pain h3 { font-size: 28px; margin-bottom: 12px; }
+  .pain p { color: var(--muted); }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 32px; display: flex; flex-direction: column; gap: 14px; transition: transform .25s, box-shadow .25s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(28,42,36,.08); }
+  .card p { color: var(--muted); }
+  .icon { width: 44px; height: 44px; color: var(--orange-text); }
+  .icon.green { color: var(--green); }
+
+  .module { border-top: 5px solid var(--orange); padding-top: 24px; }
+  .module.green { border-color: var(--green); }
+  .module h3 { margin-bottom: 16px; }
+  .module ul { padding-left: 22px; display: flex; flex-direction: column; gap: 10px; color: #3a4540; }
+  .module li::marker { color: var(--orange-text); }
+  .module.green li::marker { color: var(--green); }
+  #modulo2 .eyebrow { color: var(--green); }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--line-2); background: var(--card); }
+  table { width: 100%; border-collapse: collapse; min-width: 640px; }
+  th { background: var(--dark); color: var(--paper); text-align: left; padding: 16px 20px; font-size: 15px; letter-spacing: .5px; }
+  td { padding: 16px 20px; border-top: 1px solid var(--line-2); vertical-align: top; }
+  td:first-child { font-weight: 700; }
+  td:last-child { color: #3a4540; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 18px; align-items: stretch; }
+  .step { background: var(--dark-2); border-radius: 18px; padding: 32px; display: flex; flex-direction: column; gap: 12px; }
+  .step .big { font-family: var(--serif); font-size: 72px; line-height: 1; color: var(--orange-light); }
+  .step p { color: var(--muted-dark); }
+  .arrow { align-self: center; color: var(--orange-light); width: 32px; height: 32px; }
+
+  /* Rows */
+  .rows { border-top: 1px solid var(--line-2); }
+  .row { display: grid; grid-template-columns: 56px 1fr 1.3fr; gap: 28px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line-2); }
+  .row p { color: var(--muted); }
+
+  /* Closing */
+  .closing { background: var(--orange); color: var(--dark); padding: 120px 0; }
+  .closing .eyebrow { color: var(--dark); }
+  .closing h2 { font-size: clamp(56px, 10vw, 120px); margin-bottom: 24px; }
+  .closing p.lead { font-size: clamp(20px, 2.6vw, 30px); line-height: 1.35; max-width: 820px; }
+  .closing .foot { margin-top: 64px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-weight: 600; }
+
+  /* Downloads */
+  .downloads { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .dl { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px; text-decoration: none; transition: transform .25s, box-shadow .25s, border-color .25s; }
+  .dl:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(28,42,36,.08); border-color: var(--orange); }
+  .dl h3 { margin-bottom: 6px; }
+  .dl p { color: var(--muted); font-size: 16px; }
+  .dl-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--dark); color: var(--paper); font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 999px; white-space: nowrap; }
+  .dl-btn svg { width: 18px; height: 18px; }
+  .dl:hover .dl-btn { background: var(--orange); color: var(--dark); }
+  @media (max-width: 900px) {
+    .downloads { grid-template-columns: 1fr; }
+    .dl { grid-template-columns: auto 1fr; }
+    .dl-btn { grid-column: 1 / -1; justify-self: start; }
+  }
+
+  footer { background: var(--dark); color: #aeb5ad; font-size: 14px; padding: 28px 0; text-align: center; }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .grid-3 { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .arrow { transform: rotate(90deg); }
+    .row { grid-template-columns: 44px 1fr; }
+    .row p { grid-column: 2; }
+    nav .brand { display: none; }
+  }
+  @media (max-width: 700px) {
+    section { padding: 72px 0; }
+    .grid-2 { grid-template-columns: 1fr; gap: 48px; }
+    h2 { margin-bottom: 36px; }
+    body { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Ícones reutilizáveis (SVG inline, sem dependências) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.8c2 .7 3.2 2.5 3.5 5.2"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 21H20"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<nav aria-label="Seções">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Gestão Inteligente</a>
+    <ul>
+      <li><a href="#problema">Problema</a></li>
+      <li><a href="#projeto">Projeto</a></li>
+      <li><a href="#modulo1">Módulo 1</a></li>
+      <li><a href="#modulo2">Módulo 2</a></li>
+      <li><a href="#ferramentas">Ferramentas</a></li>
+      <li><a href="#parcerias">Parcerias</a></li>
+      <li><a href="#formatos">Formatos</a></li>
+      <li><a href="#divulgacao">Divulgação</a></li>
+      <li><a href="#materiais">Materiais</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <p class="eyebrow">Projeto educativo · Atividade de Extensão II</p>
+    <h1>Gestão Inteligente</h1>
+    <p class="lead">Como a Inteligência Artificial pode transformar o <span>marketing</span> e as <span>finanças</span> da sua empresa.</p>
+    <a class="btn" href="#problema">Conhecer o projeto</a>
+    <p class="author">Julio Cesar Modanez Silva · RA 2603437</p>
+  </div>
+</header>
+
+<main>
+
+<section id="problema">
+  <div class="wrap">
+    <p class="eyebrow reveal">O problema</p>
+    <h2 class="reveal">Duas grandes dores do pequeno empresário</h2>
+    <div class="grid-2">
+      <div class="pain reveal">
+        <p class="num">01</p>
+        <h3>Falta de tempo para atrair clientes</h3>
+        <p>Criar conteúdo, responder mensagens e acompanhar cada cliente consome horas que o dono não tem.</p>
+      </div>
+      <div class="pain green reveal">
+        <p class="num">02</p>
+        <h3>Dificuldade em organizar as finanças</h3>
+        <p>Contas pessoais e da empresa misturadas, sem fluxo de caixa e com preços definidos no “achismo”.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projeto" class="alt">
+  <div class="wrap">
+    <p class="eyebrow reveal">O projeto</p>
+    <h2 class="reveal">Um ciclo de palestras e workshops práticos</h2>
+    <div class="grid-3">
+      <article class="card reveal">
+        <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+        <h3>Formato</h3>
+        <p>Um módulo único de 3 horas.</p>
+      </article>
+      <article class="card reveal">
+        <svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>
+        <h3>Público-alvo</h3>
+        <p>MEIs e donos de microempresas: comércio local, serviços, artesanato e alimentação.</p>
+      </article>
+      <article class="card reveal">
+        <svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg>
+        <h3>Objetivo</h3>
+        <p>Ensinar a usar IA acessível em vendas, relacionamento com clientes e controle financeiro.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="modulo1">
+  <div class="wrap">
+    <p class="eyebrow reveal">Módulo 1</p>
+    <h2 class="reveal">Comunicação de Marketing e CRM com IA</h2>
+    <div class="grid-2">
+      <div class="module reveal">
+        <h3>Atração e conteúdo automático</h3>
+        <ul>
+          <li>Textos para posts, legendas, roteiros de Reels/TikTok e e-mails promocionais</li>
+          <li>Imagens e banners criados com IA para redes sociais e WhatsApp Business</li>
+        </ul>
+      </div>
+      <div class="module reveal">
+        <h3>CRM e relacionamento inteligente</h3>
+        <ul>
+          <li>O que é CRM: contatos e histórico de vendas</li>
+          <li>Assistentes no WhatsApp para atendimento, agendamentos e dúvidas frequentes</li>
+          <li>Segmentação (clientes sumidos vs. VIPs) e ofertas personalizadas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="modulo2" class="alt">
+  <div class="wrap">
+    <p class="eyebrow reveal">Módulo 2</p>
+    <h2 class="reveal">Gestão financeira descomplicada com IA</h2>
+    <div class="grid-2">
+      <div class="module green reveal">
+        <h3>Organização financeira básica</h3>
+        <ul>
+          <li>Separação das contas pessoais e da empresa (PF vs. PJ)</li>
+          <li>DRE simplificado e controle do fluxo de caixa: entradas e saídas</li>
+        </ul>
+      </div>
+      <div class="module green reveal">
+        <h3>IA aplicada às finanças</h3>
+        <ul>
+          <li>Leitura automática de comprovantes e notas fiscais para planilhas e sistemas</li>
+          <li>Previsão de caixa e análise de vendas: o mais lucrativo vs. o encalhado</li>
+          <li>Precificação de produtos e serviços com ajuda de prompts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ferramentas">
+  <div class="wrap">
+    <p class="eyebrow reveal">Ecossistema de IA</p>
+    <h2 class="reveal">Ferramentas gratuitas ou de baixo custo</h2>
+    <div class="table-wrap reveal">
+      <table>
+        <thead>
+          <tr><th>Área</th><th>Ferramentas</th><th>Uso prático na palestra</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Texto e copywriting</td><td>ChatGPT, Gemini</td><td>Campanhas de vendas e legendas para Instagram</td></tr>
+          <tr><td>Design e divulgação</td><td>Canva (Magic Studio)</td><td>Artes, panfletos digitais e logotipos</td></tr>
+          <tr><td>CRM e automação</td><td>Chatwoot, RD Station, Kommo, Notion</td><td>Funil de vendas e histórico de clientes</td></tr>
+          <tr><td>Atendimento (WhatsApp)</td><td>Evolution API, Z-API, ManyChat</td><td>Respostas automáticas no WhatsApp</td></tr>
+          <tr><td>Finanças e planilhas</td><td>Google Sheets + ChatGPT / Copilot</td><td>Fórmulas automáticas, análise de gastos e precificação</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="parcerias" class="alt">
+  <div class="wrap">
+    <p class="eyebrow reveal">Integração com as microempresas</p>
+    <h2 class="reveal">Parcerias estratégicas, não captação individual</h2>
+    <div class="grid-3">
+      <article class="card reveal">
+        <svg class="icon green" aria-hidden="true"><use href="#i-users"/></svg>
+        <h3>Associações Comerciais e CDLs</h3>
+        <p>Canal ideal para palestras gratuitas de conscientização, que abrem portas para consultorias.</p>
+      </article>
+      <article class="card reveal">
+        <svg class="icon green" aria-hidden="true"><use href="#i-shield"/></svg>
+        <h3>Cooperativas de crédito e bancos locais</h3>
+        <p>Interesse em educar financeiramente clientes PJ para reduzir a inadimplência.</p>
+      </article>
+      <article class="card reveal">
+        <svg class="icon green" aria-hidden="true"><use href="#i-bulb"/></svg>
+        <h3>Hubs de inovação e secretarias</h3>
+        <p>Secretarias de Desenvolvimento Econômico costumam apoiar capacitações locais.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="formatos" class="dark">
+  <div class="wrap">
+    <p class="eyebrow reveal">Formatos de entrega</p>
+    <h2 class="reveal">Uma jornada em três etapas</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <p class="big">1h</p>
+        <h3>Palestra gratuita de sensibilização</h3>
+        <p>Mostra os problemas e os resultados possíveis com IA.</p>
+      </div>
+      <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+      <div class="step reveal">
+        <p class="big">4h</p>
+        <h3>Workshop prático “mão na massa”</h3>
+        <p>O empresário sai com seus prompts criados e o fluxo configurado.</p>
+      </div>
+      <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+      <div class="step reveal">
+        <p class="big">+</p>
+        <h3>Acompanhamento e mentoria (opcional)</h3>
+        <p>Implementação guiada dentro da própria empresa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="divulgacao">
+  <div class="wrap">
+    <p class="eyebrow reveal">Material de divulgação</p>
+    <h2 class="reveal">Disponibilização de um kit de marketing criado com a própria IA</h2>
+    <div class="rows">
+      <div class="row reveal">
+        <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>
+        <h3>Folder / apresentação comercial</h3>
+        <p>Para parceiros como associações, CDLs e microempreendedores.</p>
+      </div>
+      <div class="row reveal">
+        <svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg>
+        <h3>Carrossel para Instagram / LinkedIn</h3>
+        <p>“5 maneiras de economizar 10 horas por semana na sua empresa com IA”.</p>
+      </div>
+      <div class="row reveal">
+        <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+        <h3>Mensagem de prospecção</h3>
+        <p>Convite direto por WhatsApp ou e-mail para donos de negócios locais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="encerramento">
+  <div class="wrap">
+    <p class="eyebrow reveal">Gestão Inteligente</p>
+    <h2 class="reveal">Obrigado!</h2>
+    <p class="lead reveal">IA acessível para que o pequeno empresário tenha mais tempo para vender e mais clareza sobre o seu dinheiro.</p>
+    <div class="foot reveal">
+      <span>Perguntas?</span>
+      <span>Julio Cesar Modanez Silva · RA 2603437</span>
+    </div>
+  </div>
+</section>
+
+<section id="materiais">
+  <div class="wrap">
+    <p class="eyebrow reveal">Materiais</p>
+    <h2 class="reveal">Baixe os documentos do projeto</h2>
+    <div class="downloads">
+      <a class="dl reveal" href="Gestao-Inteligente-Apresentacao.pdf" download>
+        <svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>
+        <div>
+          <h3>Apresentação do trabalho</h3>
+          <p>Versão em PDF dos slides do projeto Gestão Inteligente.</p>
+        </div>
+        <span class="dl-btn"><svg aria-hidden="true"><use href="#i-download"/></svg>PDF</span>
+      </a>
+      <a class="dl reveal" href="Gestao-Inteligente-Guia-de-Implantacao.pdf" download>
+        <svg class="icon green" aria-hidden="true"><use href="#i-book"/></svg>
+        <div>
+          <h3>Guia de Implantação e Kit de Material de Apoio</h3>
+          <p>Proposta de parceria institucional e guia de prompts práticos para os alunos.</p>
+        </div>
+        <span class="dl-btn"><svg aria-hidden="true"><use href="#i-download"/></svg>PDF</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Projeto educativo · Atividade de Extensão II</div>
+</footer>
+
+<script>
+  // Animação ao rolar
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    reveals.forEach((el) => io.observe(el));
+  } else {
+    reveals.forEach((el) => el.classList.add('in'));
+  }
+
+  // Destaca a seção atual no menu
+  const links = document.querySelectorAll('nav ul a');
+  const sections = [...links].map((a) => document.querySelector(a.getAttribute('href')));
+  const navIo = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        links.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach((s) => s && navIo.observe(s));
+</script>
+</body>
+</html>
